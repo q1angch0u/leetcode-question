@@ -57,7 +57,7 @@ public static void main(String[] args) {
    Solution solution = new LinkedListCycle().new Solution();
 }
 
-class ListNode {
+private class ListNode {
     int val;
     ListNode next;
     ListNode(int x) {

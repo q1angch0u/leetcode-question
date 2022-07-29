@@ -48,7 +48,7 @@ public class AddTwoNumbers{
   }
 
 
-class ListNode {
+private class ListNode {
     int val;
     ListNode next;
     ListNode() {}
