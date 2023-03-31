@@ -1,0 +1,39 @@
+    class Solution {
+        public int findKthLargest(int[] nums, int k) {
+            int left = 0, right = nums.length - 1, target = nums.length - k;
+            while (left < right) {
+                int mid = quickSelect(nums, left, right);
+                if (mid == target) {
+                    return nums[mid];
+                }
+                if (mid < target) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
+            return nums[left];
+        }
+        private int quickSelect(int[] nums, int left, int right) {
+            int priov = left;
+            while (left < right) {
+                while (left < right && nums[right] >= nums[priov]) {
+                    right--;
+                }
+                while (left < right && nums[left] <=nums[priov]) {
+                    left++;
+                }
+                swap(nums, left, right);
+            }
+            swap(nums, left, priov);
+            return left;
+        }
+        private void swap(int[] nums, int i, int j) {
+            int t = nums[i];
+            nums[i] = nums[j];
+            nums[j] = t;
+        }
+    }
+
+//runtime:26 ms
+//memory:76.6 MB

@@ -1,4 +1,4 @@
-//Design a data structure that follows the constraints of a Least Recently Used 
+  //Design a data structure that follows the constraints of a Least Recently Used 
 //(LRU) cache. 
 //
 // Implement the LRUCache class: 
@@ -48,103 +48,104 @@
 // At most 2 * 10⁵ calls will be made to get and put. 
 // 
 //
-// Related Topics Hash Table Linked List Design Doubly-Linked List 👍 15307 👎 6
-//39
+// Related Topics Hash Table Linked List Design Doubly-Linked List 👍 15852 👎 6
+//77
 
-
+  
 package com.q1angch0u.leetcode.editor.en;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+  import java.util.HashMap;
+  import java.util.Map;
 
-public class LruCache{
+  public class LruCache{
     public static void main(String[] args) {
-       LRUCache solution = new LruCache().new LRUCache(0);
+        LRUCache solution = new LruCache().new LRUCache(0);
     }
+    
     //leetcode submit region begin(Prohibit modification and deletion)
     class LRUCache {
 
         Map<Integer, DLinkedNode> cache = new HashMap<>();
-        int size, capacity;
+        int capacity;
+        int size;
         DLinkedNode head, tail;
 
         public LRUCache(int capacity) {
-            this.size = 0;
             this.capacity = capacity;
+            this.size = 0;
             this.head = new DLinkedNode();
             this.tail = new DLinkedNode();
-            head.next = tail;
-            tail.prev = head;
+            this.head.next = this.tail;
+            this.tail.prev = this.head;
         }
 
         public int get(int key) {
-            if (!cache.containsKey(key)) {
+            if (!this.cache.containsKey(key)) {
                 return -1;
             }
-            DLinkedNode node = cache.get(key);
-            this.moveToHead(node);
+            DLinkedNode node = this.cache.get(key);
+            this.move2Head(node);
             return node.val;
         }
 
         public void put(int key, int value) {
-            if (cache.containsKey(key)) {
-                DLinkedNode node = cache.get(key);
+            if (this.cache.containsKey(key)) {
+                DLinkedNode node = this.cache.get(key);
                 node.val = value;
-                moveToHead(node);
+                move2Head(node);
                 return;
             }
             DLinkedNode node = new DLinkedNode(key, value);
+            this.add2Head(node);
             cache.put(key, node);
-            this.addToHead(node);
-            this.size++;
-            if (this.size > this.capacity) {
+            size++;
+            if (size > capacity) {
                 DLinkedNode tail = this.tail.prev;
-                this.removeNode(tail);
+                removeNode(tail);
                 cache.remove(tail.key);
                 size--;
             }
         }
 
-        private void addToHead(DLinkedNode node) {
-            node.prev = this.head;
+        private void add2Head(DLinkedNode node) {
             node.next = this.head.next;
+            node.prev = this.head;
             this.head.next.prev = node;
             this.head.next = node;
         }
 
         private void removeNode(DLinkedNode node) {
-            node.prev.next = node.next;
             node.next.prev = node.prev;
+            node.prev.next = node.next;
         }
 
-        private void moveToHead(DLinkedNode node) {
-            removeNode(node);
-            addToHead(node);
+        private void move2Head(DLinkedNode node) {
+            this.removeNode(node);
+            this.add2Head(node);
+        }
+
+        class DLinkedNode {
+            int key;
+            int val;
+            DLinkedNode prev;
+            DLinkedNode next;
+
+            public DLinkedNode() {}
+            public DLinkedNode(int k, int v) {
+                this.key = k;
+                this.val = v;
+            }
         }
 
 
     }
 
-    class DLinkedNode {
-        int key;
-        int val;
-        DLinkedNode prev;
-        DLinkedNode next;
-        public DLinkedNode() {
-        }
-        public DLinkedNode(int key, int val) {
-            this.key = key;
-            this.val = val;
-        }
-    }
-
-/**
- * Your LRUCache object will be instantiated and called as such:
- * LRUCache obj = new LRUCache(capacity);
- * int param_1 = obj.get(key);
- * obj.put(key,value);
- */
-//leetcode submit region end(Prohibit modification and deletion)
+    /**
+     * Your LRUCache object will be instantiated and called as such:
+     * LRUCache obj = new LRUCache(capacity);
+     * int param_1 = obj.get(key);
+     * obj.put(key,value);
+     */
+    //leetcode submit region end(Prohibit modification and deletion)
 
 }

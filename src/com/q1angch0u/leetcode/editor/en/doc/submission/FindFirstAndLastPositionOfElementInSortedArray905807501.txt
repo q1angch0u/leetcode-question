@@ -1,0 +1,37 @@
+    class Solution {
+        public int[] searchRange(int[] nums, int target) {
+            int[] res = new int[]{-1, -1};
+            int n = nums.length;
+            if (n == 0) {
+                return res;
+            }
+
+            int left = 0, right = n - 1;
+            while (left <= right) {
+                int mid = (left + right) / 2;
+                if (nums[mid] < target) {
+                    left = mid + 1;
+                    continue;
+                }
+                if (nums[mid] > target) {
+                    right = mid - 1;
+                    continue;
+                }
+                left = mid - 1;
+                right = mid + 1;
+                while (left >= 0 && nums[left] == target) {
+                    left--;
+                }
+                while (right < n && nums[right] == target) {
+                    right++;
+                }
+                res[0] = left + 1;
+                res[1] = right - 1;
+                return res;
+            }
+            return res;
+        }
+    }
+
+//runtime:0 ms
+//memory:45.4 MB
