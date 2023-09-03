@@ -90,16 +90,24 @@ class Solution {
     }
 
     int romanCharToNumber(char c) {
-        return switch (c) {
-            case 'M' -> 1000;
-            case 'D' -> 500;
-            case 'C' -> 100;
-            case 'L' -> 50;
-            case 'X' -> 10;
-            case 'V' -> 5;
-            case 'I' -> 1;
-            default -> 0;
-        };
+        switch (c) {
+            case 'M':
+                return 1000;
+            case 'D':
+                return 500;
+            case 'C':
+                return 100;
+            case 'L':
+                return 50;
+            case 'X':
+                return 10;
+            case 'V':
+                return 5;
+            case 'I':
+                return 1;
+            default:
+                return 0;
+        }
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
