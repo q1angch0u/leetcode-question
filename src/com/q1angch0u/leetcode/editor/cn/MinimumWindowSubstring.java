@@ -63,12 +63,12 @@ public class MinimumWindowSubstring {
             char[] tt = t.toCharArray();
             int m = ss.length;
             int n = tt.length;
-            if (m < n || m == 0 || n == 0) {
+            if (m == 0 || n == 0 || m < n) {
                 return "";
             }
-            Map<Character, Integer> cache = new HashMap<>();
             int left = 0, right = 0;
             int min = Integer.MAX_VALUE, begin = -1;
+            Map<Character, Integer> cache = new HashMap<>();
             for (char c : tt) {
                 cache.put(c, cache.getOrDefault(c, 0) + 1);
             }
@@ -86,13 +86,12 @@ public class MinimumWindowSubstring {
                     }
                     c = ss[left++];
                     cache.put(c, cache.getOrDefault(c, 0) + 1);
-                    if (cache.get(c) > 0) {
+                    if (cache.get(c) == 1) {
                         diff++;
                     }
                 }
             }
             return min == Integer.MAX_VALUE ? "" : s.substring(begin, begin + min);
-
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
